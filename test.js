@@ -8,15 +8,17 @@ const greet = input => console.log(`hello, ${input}`);
 
 // greet(myName);
 
-console.log(global);
+// console.log(global);
 
-setTimeout(() => {
-  console.log('in the timeout');
-  clearInterval(int)
-}, 4000)
+// setTimeout(() => {
+//   console.log('in the timeout');
+//   clearInterval(int)
+// }, 4000)
 
 
-const int = setInterval(() => {
-  console.log(interval += 1)
-}, 1000)
+// const int = setInterval(() => {
+//   console.log(interval += 1)
+// }, 1000)
 
+console.log(__dirname);
+console.log(__filename);
