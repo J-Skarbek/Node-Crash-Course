@@ -5,6 +5,16 @@ const http = require('http');
 // to two objects: the request and response objects
 const server = http.createServer((req, res) => {
   console.log('Request made');
+  console.log(req.url, req.method);
+
+  // set Header content type
+  res.setHeader('Content-Type', 'text/html');
+  // set header content
+  res.write('<p>Hello, John S.</p>');
+  res.write('<p>This is in HTML.</p>');
+  // send the header as a response in the browser
+  res.end();
+
 });
 
 // .listen() method actually allows the server to listen for requests
