@@ -15,15 +15,20 @@ const server = http.createServer((req, res) => {
     switch(req.url) {
       case '/':
         path += 'index.html';
-        res.statusCode = 200; //This method lets us set status codes
+        res.statusCode = 200; //This method lets us set status codes - success
         break;
       case '/about':
         path += 'about.html';
-        res.statusCode = 200; //This method lets us set status codes
+        res.statusCode = 200; //This method lets us set status codes - success
+        break;
+      case '/about-me':
+        res.statusCode = 301; //This method lets us set status codes - permanant redirect
+        res.setHeader('Location', '/about'); //This is taking 2 arguments, the capital-L 'Location' and the route we want to redirct to
+        res.end(); //Need to explicitly add with a call to .end() on a redirect
         break;
       default:
         path += '404.html';
-        res.statusCode = 404; //This method lets us set status codes
+        res.statusCode = 404; //This method lets us set status codes - page not found
         break;
     }
 
