@@ -26,11 +26,13 @@ app.get('/', (req, res) => {
 
 app.get('/about', (req, res) => {
   //res.send('<p>About Page is here -- express app</p>');
-  res.sendFile('./views/about.html', { root: __dirname });
+  // res.sendFile('./views/about.html', { root: __dirname });
+
+  res.render('about')
 })
 
-app.get('/about-us', (req, res) => {
-  res.redirect('/about');
+app.get('/blogs/create', (req, res) => {
+  res.render('create');
 })
 
 //404 handling
@@ -43,5 +45,7 @@ app.use((req, res) => {
 
   // For this line, you need to manually add the .status() method to 
   // send the correct status code to the browser
-  res.status(404).sendFile('./views/404.html', { root: __dirname });
+  // res.status(404).sendFile('./views/404.html', { root: __dirname });
+
+  res.status(404).render('404');
 }) 
