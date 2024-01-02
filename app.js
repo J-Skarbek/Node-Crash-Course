@@ -1,6 +1,10 @@
 const express = require('express');
 
 const app = express();
+app.set('view engine', 'ejs');
+// Note -- you can use app.set() with two parameters, the 1st being
+// 'views' and the 2nd being the folder you want ejs/express to 'look in'
+// to find your ejs files
 
 //listen for requests
 app.listen(3000);
