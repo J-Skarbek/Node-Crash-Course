@@ -19,12 +19,19 @@ app.get('/', (req, res) => {
   //commenting this out to work with EJS views
   //  res.sendFile('./views/index.html', { root: __dirname });
 
+  // You can pass in an array of data to a view like so
+  const blogs = [
+    {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+    {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+    {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+  ];
+
   // The .render() method renders a view from ejs, just
   // need to provide the name of the view minus the file extension
 
   // res.render() can accept a data object as 2nd parameter which
   // can then be used dynamically in views pages
-  res.render('index', { title: 'Home' })
+  res.render('index', { title: 'Home', blogs })
 })
 
 app.get('/about', (req, res) => {
