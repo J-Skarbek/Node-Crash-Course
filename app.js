@@ -21,18 +21,21 @@ app.get('/', (req, res) => {
 
   // The .render() method renders a view from ejs, just
   // need to provide the name of the view minus the file extension
-  res.render('index')
+
+  // res.render() can accept a data object as 2nd parameter which
+  // can then be used dynamically in views pages
+  res.render('index', { title: 'Home' })
 })
 
 app.get('/about', (req, res) => {
   //res.send('<p>About Page is here -- express app</p>');
   // res.sendFile('./views/about.html', { root: __dirname });
 
-  res.render('about')
+  res.render('about', { title: 'About Us' })
 })
 
 app.get('/blogs/create', (req, res) => {
-  res.render('create');
+  res.render('create', { title: 'Create Blogs' });
 })
 
 //404 handling
@@ -47,5 +50,5 @@ app.use((req, res) => {
   // send the correct status code to the browser
   // res.status(404).sendFile('./views/404.html', { root: __dirname });
 
-  res.status(404).render('404');
+  res.status(404).render('404', { title: 'Page Not Found!' });
 }) 
