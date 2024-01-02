@@ -16,6 +16,22 @@ app.get('/', (req, res) => {
 
 app.get('/about', (req, res) => {
   //res.send('<p>About Page is here -- express app</p>');
-
   res.sendFile('./views/about.html', { root: __dirname });
 })
+
+app.get('/about-us', (req, res) => {
+  res.redirect('/about');
+})
+
+//404 handling
+
+// The .use() method will fire on every request, but only if it the request
+// reaches this point in the code (ie. is not handled by the previous .get() )
+// methods -- if this went above the other route handlers, this .use() method
+// would fire and it won't reacht the subsequent handlers
+app.use((req, res) => {
+
+  // For this line, you need to manually add the .status() method to 
+  // send the correct status code to the browser
+  res.status(404).sendFile('./views/404.html', { root: __dirname });
+}) 
