@@ -1,12 +1,23 @@
 const http = require('http');
 const fs = require('fs');
+const _ = require('lodash');
 
 // 1st argument takes a callback function, which runs anytime a request
 // comes into this server we created. This callback function provided access
 // to two objects: the request and response objects
 const server = http.createServer((req, res) => {
   console.log('Request made');
-  console.log(req.url, req.method);
+  // console.log(req.url, req.method);
+
+  // Lodash
+  const num = _.random(0, 20);
+  console.log(num);
+
+  const greet = _.once(() => {
+    console.log('hello');
+  });
+
+  greet();
 
   // set Header content type
     res.setHeader('Content-Type', 'text/html');
