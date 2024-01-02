@@ -20,13 +20,15 @@
       </div>
     </div>
     <div class="main content">
-      <h2>All Blogs Display Here</h2>
+      <h2>All Blogs</h2>
 
       <% if (blogs.length > 0) { %>
         <% blogs.forEach(blog => { %>
           <h3 class="blog-title"><%= blog.title %></h3>
           <p class="blog-snippet"><%= blog.snippet %></p>
         <% }) %>
+      <% } else { %>
+        <p>There are no blogs to display.</p>
       <% } %>
 
     </div>  
