@@ -15,7 +15,13 @@ app.get('/', (req, res) => {
   // pass in the root of the file being equal to the current directory;
   // this can also be used by using the express 'path' module as seen
   // in other examples
-  res.sendFile('./views/index.html', { root: __dirname });
+
+  //commenting this out to work with EJS views
+  //  res.sendFile('./views/index.html', { root: __dirname });
+
+  // The .render() method renders a view from ejs, just
+  // need to provide the name of the view minus the file extension
+  res.render('index')
 })
 
 app.get('/about', (req, res) => {
