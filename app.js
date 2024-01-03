@@ -10,6 +10,12 @@ app.set('view engine', 'ejs');
 //listen for requests
 app.listen(3000);
 
+// Middleware & static files
+
+// This .static() method takes a folder name for it's argument, and makes the static
+// files in it available to the front end
+app.use(express.static('public'));
+
 // Sample middleware that logs details -- will run on every request since it's at the top
 // of the middleware list (ie. it's before other requests that explicitly return a response
 // to the browser such as .get() requests.
