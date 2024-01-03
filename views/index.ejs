@@ -10,13 +10,7 @@
       <h1>Testing Express Application | <%= title %></h1>
       <p>This is a testing application for the Net Ninja Course</p>
       <div class="navigation">
-        <nav>
-          <ul>
-            <li><a href="/">Homepage</a></li>
-            <li><a href="/about">About Page</a></li>
-            <li><a href="/blogs/create">New Blog</a></li>
-          </ul>
-        </nav>
+        <%- include('./partials/nav.ejs') %>
       </div>
     </div>
     <div class="main content">
