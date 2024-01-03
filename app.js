@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -12,27 +13,22 @@ app.listen(3000);
 // Sample middleware that logs details -- will run on every request since it's at the top
 // of the middleware list (ie. it's before other requests that explicitly return a response
 // to the browser such as .get() requests.
-app.use((req, res, next) => {
-  console.log('new request made:');
-  console.log('host: ', req.hostname);
-  console.log('path: ', req.path);
-  console.log('method: ', req.method);
 
-  // Once the above code runs, the browser tab is left in a state of hanging because
-  // the middleware isn't explicitly moving on to the next function, thus you need
-  // to add the .next() function
-  next();
-})
+// Commenting out to use Morgan middleware
 
-app.use((req, res, next) => {
-  //Just a sample example of another peice of middleware
-  console.log('In the next middleware');
+// app.use((req, res, next) => {
+//   console.log('new request made:');
+//   console.log('host: ', req.hostname);
+//   console.log('path: ', req.path);
+//   console.log('method: ', req.method);
 
-  // Once the above code runs, the browser tab is left in a state of hanging because
-  // the middleware isn't explicitly moving on to the next function, thus you need
-  // to add the .next() function
-  next();
-})
+//   // Once the above code runs, the browser tab is left in a state of hanging because
+//   // the middleware isn't explicitly moving on to the next function, thus you need
+//   // to add the .next() function
+//   next();
+// })
+
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   //res.send('<p>homepage is here -- express app</p>');
