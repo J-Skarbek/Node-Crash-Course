@@ -2,23 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
-// mongoose.set("strictQuery", false);
-// const mongoDB = 'mongodb+srv://john_s:GRhgXJr4pvL6HzCw@database.usdwjcs.mongodb.net/?retryWrites=true&w=majority';
-// main().catch((err) => console.log(err));
-// async function main() {
-//   await mongoose.connect(mongoDB)
-//     .then((result) => console.log('connected to db'))
-//     .catch((err) => console.log(err))
-// }
-
-// Connect to mongoDB
-const dbURI = 'mongodb+srv://john_s:GRhgXJr4pvL6HzCw@database.usdwjcs.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(dbURI)
-  .then((result) => console.log('connected to db'))
-  .catch((err) => console.log(err))
-  .finally(() => console.log('did something happen?'));
-
-mongoose.connection.on('connected', () => console.log('connected'));
+//connection urls on local doc
 
 const app = express();
 app.set('view engine', 'ejs');
