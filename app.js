@@ -2,10 +2,14 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 // const keys = requrire('keys.env');
+const Blog = require('./models/blog')
 
 const app = express();
 
 //connection urls on local doc
+
+
+
 
 app.set('view engine', 'ejs');
 // Note -- you can use app.set() with two parameters, the 1st being
@@ -40,6 +44,31 @@ app.use(express.static('public'));
 // })
 
 app.use(morgan('dev'));
+
+
+// Mongoose and mongo sandbox routes
+app.get('/add-blog', (req, res) => {
+  // Make sure to import the Blog object/constructor in top of file
+  // Then pass in the correct params
+  const blog = new Blog({
+    title: 'New Blog',
+    snippet: 'About my new blog...',
+    body: 'More information about my blog...'
+  });
+
+  // blog.save() is an async function
+  blog.save()
+    .then((result) => {
+      res.send(result)
+      // Note, the result sent back is not the same thing as the object crated
+      // above, with ' = new Blog() ' -- instead it sends back the fully fleshed-out
+      // object that is created in the mongoDB collection
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
 
 app.get('/', (req, res) => {
   //res.send('<p>homepage is here -- express app</p>');

@@ -14,6 +14,8 @@ const blogSchema = new Schema({
     type: String,
     required: true
   }
+  // Note: with mongoose/MondoDB -- you don't need to add an _id property, as
+  // it will be created automatically when creating new items in the collection
 
 }, { timestamps: true })
 
