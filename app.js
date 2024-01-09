@@ -9,9 +9,12 @@ const app = express();
 //connection urls on local doc
 
 
+mongoose.connect(dbURI)
+  .then((result) => app.listen(3000))
+  .catch((err) => console.log(err + ' oppos'));
 
 
-app.set('view engine', 'ejs');
+  app.set('view engine', 'ejs');
 // Note -- you can use app.set() with two parameters, the 1st being
 // 'views' and the 2nd being the folder you want ejs/express to 'look in'
 // to find your ejs files
@@ -101,26 +104,52 @@ app.get('/', (req, res) => {
   //commenting this out to work with EJS views
   //  res.sendFile('./views/index.html', { root: __dirname });
 
+  // Commenting out blog data array as we will now pull it from
+  // mongo db as seen below
+
   // You can pass in an array of data to a view like so
-  const blogs = [
-    {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
-  ];
+  // const blogs = [
+  //   {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+  //   {title: 'Mario finds stars', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+  //   {title: 'How to defeat bowser', snippet: 'Lorem ipsum dolor sit amet consectetur'},
+  // ];
 
   // The .render() method renders a view from ejs, just
   // need to provide the name of the view minus the file extension
 
   // res.render() can accept a data object as 2nd parameter which
   // can then be used dynamically in views pages
-  res.render('index', { title: 'Home', blogs })
+
+  // Commenting out next line because we're now pulling data from mongo
+  // collection in code below
+  // res.render('index', { title: 'Home', blogs })
+
+  //Create redirect to the /blogs URL
+  res.redirect('/blogs');
 })
+
 
 app.get('/about', (req, res) => {
   //res.send('<p>About Page is here -- express app</p>');
   // res.sendFile('./views/about.html', { root: __dirname });
 
   res.render('about', { title: 'About Us' })
+})
+
+// Blogs routes below:
+
+// This new method is querying all the items in the db collection
+app.get('/blogs', (req, res) => {
+  Blog.find().sort({ createdAt: -1 })
+    .then((result) => {
+      res.render('index', {
+        title: 'All Blogs',
+        blogs: result
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    }) 
 })
 
 app.get('/blogs/create', (req, res) => {
