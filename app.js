@@ -1,23 +1,25 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+// const keys = requrire('keys.env');
+
+const app = express();
 
 //connection urls on local doc
 
-const app = express();
 app.set('view engine', 'ejs');
 // Note -- you can use app.set() with two parameters, the 1st being
 // 'views' and the 2nd being the folder you want ejs/express to 'look in'
 // to find your ejs files
 
-//listen for requests
-app.listen(3000);
+//listen for requests -- moved into the async function above, only runs once the db connection is made
 
 // Middleware & static files
 
 // This .static() method takes a folder name for it's argument, and makes the static
 // files in it available to the front end
 app.use(express.static('public'));
+
 
 // Sample middleware that logs details -- will run on every request since it's at the top
 // of the middleware list (ie. it's before other requests that explicitly return a response
