@@ -69,6 +69,27 @@ app.get('/add-blog', (req, res) => {
     })
 })
 
+app.get('/all-blogs', (req, res) => {
+  // .find() method will find and return items in the collection that 
+  // exist in the Blog's model
+  Blog.find()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+})
+
+app.get('/single-blog', (req, res) => {
+  Blog.findById('659d70f147b2c210d73728d3')
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+})
 
 app.get('/', (req, res) => {
   //res.send('<p>homepage is here -- express app</p>');
