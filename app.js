@@ -28,6 +28,7 @@ app.use(express.static('public'));
 
 // This middleware comes with express, is used to parse the form data in the
 // create.ejs file and use in below in the '/blogs' post request
+// https://www.geeksforgeeks.org/express-js-express-urlencoded-function/
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -137,7 +138,16 @@ app.get('/blogs', (req, res) => {
 })
 
 app.post('/blogs', (req, res) => {
-  console.log(req.body);
+  const blog = new Blog(req.body);
+
+  blog.save()
+    .then((result) => {
+      res.redirect('/blogs');
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  // console.log(req.body);
 })
 
 app.get('/all-blogs', (req, res) => {
