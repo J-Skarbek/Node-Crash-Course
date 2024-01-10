@@ -8,7 +8,6 @@ const app = express();
 
 //connection urls on local doc
 
-
 mongoose.connect(dbURI)
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err + ' oppos'));
@@ -26,6 +25,10 @@ mongoose.connect(dbURI)
 // This .static() method takes a folder name for it's argument, and makes the static
 // files in it available to the front end
 app.use(express.static('public'));
+
+// This middleware comes with express, is used to parse the form data in the
+// create.ejs file and use in below in the '/blogs' post request
+app.use(express.urlencoded({ extended: true }));
 
 
 // Sample middleware that logs details -- will run on every request since it's at the top
@@ -72,27 +75,7 @@ app.get('/add-blog', (req, res) => {
     })
 })
 
-app.get('/all-blogs', (req, res) => {
-  // .find() method will find and return items in the collection that 
-  // exist in the Blog's model
-  Blog.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-})
 
-app.get('/single-blog', (req, res) => {
-  Blog.findById('659d70f147b2c210d73728d3')
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-})
 
 app.get('/', (req, res) => {
   //res.send('<p>homepage is here -- express app</p>');
@@ -140,6 +123,7 @@ app.get('/about', (req, res) => {
 
 // This new method is querying all the items in the db collection
 app.get('/blogs', (req, res) => {
+  // Using -1 below sets the sort to descending order in the retunred results
   Blog.find().sort({ createdAt: -1 })
     .then((result) => {
       res.render('index', {
@@ -150,6 +134,32 @@ app.get('/blogs', (req, res) => {
     .catch((err) => {
       console.log(err);
     }) 
+})
+
+app.post('/blogs', (req, res) => {
+  console.log(req.body);
+})
+
+app.get('/all-blogs', (req, res) => {
+  // .find() method will find and return items in the collection that 
+  // exist in the Blog's model
+  Blog.find()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+})
+
+app.get('/single-blog', (req, res) => {
+  Blog.findById('659d70f147b2c210d73728d3')
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
 })
 
 app.get('/blogs/create', (req, res) => {
