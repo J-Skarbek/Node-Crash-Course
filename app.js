@@ -123,6 +123,12 @@ app.get('/about', (req, res) => {
 // Blogs routes below:
 app.use(blogRoutes);
 
+// NOTE: When useing Express Router, you can scope the router by adding
+// a first parameter, which would be the first part of the URL, for exampe:
+// -- app.use('/blogs', blogRoutes); --> when using this method, you can go into 
+// the corresponding routes file and remove the '/blogs' from any of the routing/request
+// code.
+
 //404 handling
 
 // The .use() method will fire on every request, but only if it the request
