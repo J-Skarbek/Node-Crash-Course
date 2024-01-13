@@ -150,6 +150,28 @@ app.post('/blogs', (req, res) => {
   // console.log(req.body);
 })
 
+// This .get() request handles routing requests to individual blogs based on their _id in
+// mongo. 1st argument is the route, along with the route parameter, denoted by a colon.
+// Important to note that we can name the parameter whatever, ID seems to be a common
+// convention but it can be changed for various uses. Worth noting that if you
+// use the '/:id' parameter, you'll also calll that property as see 2 lines down --
+// in the 'request.params.id -- if you used '/:nuts' then you'd call 'reqeust.params.nuts'
+app.get('/blogs/:id', (req, res) => {
+  // First thing we're doing here is getting the ID we want to search against the 
+  // DB entries
+  const id = request.params.id;
+
+  // Use the async .findById method on the Blog model, then use the result to render
+  // a details view as well as pass a data obejct to the view
+  Blog.findById(id)
+    .then(result => {
+      render('details', { blog: result, title: 'Blog Details' });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+})
+
 app.get('/all-blogs', (req, res) => {
   // .find() method will find and return items in the collection that 
   // exist in the Blog's model
