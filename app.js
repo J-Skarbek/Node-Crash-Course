@@ -8,7 +8,6 @@ const app = express();
 
 //connection urls on local doc
 
-
 mongoose.connect(dbURI)
   .then((result) => app.listen(3000))
   .catch((err) => console.log(err + ' oppos'));
@@ -173,7 +172,17 @@ app.get('/single-blog', (req, res) => {
     })
 })
 
-app.get('/blogs/create', (req, res) => {
+app.get('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  Blog.findById(id)
+    .then(result => {
+      res.render('details', { blog: result, title: 'Blog Details'});
+    })
+    .catch(err => console.log(err));
+}) 
+
+app.get('/new-blog', (req, res) => {
   res.render('create', { title: 'Create Blogs' });
 })
 
