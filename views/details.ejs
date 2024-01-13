@@ -1,0 +1,21 @@
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+  <body>
+
+    <div class="header">
+      <h1>Testing Express Application | <%= title %></h1>
+      <p>This is a testing application for the Net Ninja Course</p>
+      <div class="navigation">
+        <%- include('./partials/nav.ejs') %>
+      </div>
+    </div>
+    <div class="main content">
+      <h2><%= blog.title %></h2>
+      <div>
+        <p><%= blog.body %></p>
+      </div>
+      <a href="" class="delete" data-doc="<%= blog._id %>">Delete</a> 
+    </div>  
+  </body>
+  <%- include('./partials/footer.ejs') %>
+</html>
