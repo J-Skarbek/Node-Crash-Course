@@ -1,21 +1,10 @@
 const express = require('express');
 const Blog = require('../models/blog');
+const blogController = require('../controllers/blogController');
 const router = express.Router();
 
 // This new method is querying all the items in the db collection
-router.get('/blogs', (req, res) => {
-  // Using -1 below sets the sort to descending order in the retunred results
-  Blog.find().sort({ createdAt: -1 })
-    .then((result) => {
-      res.render('index', {
-        title: 'All Blogs',
-        blogs: result
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    }) 
-})
+router.get('/blogs', blogController.blog_index);
 
 router.post('/blogs', (req, res) => {
   const blog = new Blog(req.body);
