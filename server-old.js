@@ -2,6 +2,9 @@ const http = require('http');
 const fs = require('fs');
 const _ = require('lodash');
 
+
+// NOTE: THIS FILE WAS USED BEFORE MOVING DOWN THE PATH OF MORE ADVANCED TECHNIQUES
+
 // 1st argument takes a callback function, which runs anytime a request
 // comes into this server we created. This callback function provided access
 // to two objects: the request and response objects
