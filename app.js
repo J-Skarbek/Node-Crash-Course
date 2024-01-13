@@ -174,7 +174,6 @@ app.get('/single-blog', (req, res) => {
 
 app.get('/blogs/:id', (req, res) => {
   const id = req.params.id;
-  console.log(id);
   Blog.findById(id)
     .then(result => {
       res.render('details', { blog: result, title: 'Blog Details'});
@@ -184,6 +183,20 @@ app.get('/blogs/:id', (req, res) => {
 
 app.get('/new-blog', (req, res) => {
   res.render('create', { title: 'Create Blogs' });
+})
+
+app.delete('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+
+  // Because there is a front-end AJAX request that's sending the delete command
+  // to the db, Node cannot directly respond (i.e. redirect) in the process, so we have
+  // to send json or text data back to the browser that will send a redirect property
+  // on a json object
+  Blog.findByIdAndDelete(id)
+    .then(result => {
+      res.json({ redirect: '/blogs' });
+    })
+    .catch(err => console.log(err));
 })
 
 //404 handling
